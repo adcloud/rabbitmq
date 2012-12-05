@@ -76,6 +76,25 @@ when "rhel", "fedora"
 
 end
 
+directory "mnesia dir" do 
+  action :create
+  path node["rabbitmq"]["mnesiadir"]
+  group "rabbitmq"
+  owner "rabbitmq"
+  recursive true
+  not_if node["rabbitmq"]["mnesiadir"].nil?
+end
+
+directory "log dir" do 
+  action :create
+  path node["rabbitmq"]["logdir"]
+  group "rabbitmq"
+  owner "rabbitmq"
+  recursive true
+  not_if node["rabbitmq"]["logdir"].nil?
+end
+
+
 template "/etc/rabbitmq/rabbitmq-env.conf" do
   source "rabbitmq-env.conf.erb"
   owner "root"
