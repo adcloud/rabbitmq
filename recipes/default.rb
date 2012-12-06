@@ -108,11 +108,6 @@ template "/etc/rabbitmq/rabbitmq.config" do
   owner "root"
   group "root"
   mode 00644
-
-  if node['rabbitmq']['config_cookbook']
-    cookbook node['rabbitmq']['config_cookbook']
-  end
-
   notifies :restart, "service[rabbitmq-server]", :immediately
 end
 
@@ -124,8 +119,8 @@ end
 
 if node['rabbitmq']['cluster'] and node['rabbitmq']['erlang_cookie'] != existing_erlang_key
 
-  service "stop rabbitmq-server" do
-    service_name "rabbitmq-server"
+  service "rabbitmq-server" do
+    stop_command "sleep 10; service rabbitmq-server stop ; sleep 10"
     action :stop
   end
 
@@ -134,7 +129,7 @@ if node['rabbitmq']['cluster'] and node['rabbitmq']['erlang_cookie'] != existing
     owner "rabbitmq"
     group "rabbitmq"
     mode 00400
-    notifies :start, "service[rabbitmq-server]", :immediately
+    #notifies :start, "service[rabbitmq-server]", :immediately
   end
 
 end
