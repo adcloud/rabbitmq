@@ -108,6 +108,11 @@ template "/etc/rabbitmq/rabbitmq.config" do
   owner "root"
   group "root"
   mode 00644
+
+  if node['rabbitmq']['config_cookbook']
+    cookbook node['rabbitmq']['config_cookbook']
+  end
+
   notifies :restart, "service[rabbitmq-server]", :immediately
 end
 

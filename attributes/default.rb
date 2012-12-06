@@ -19,6 +19,7 @@ default['rabbitmq']['use_distro_version'] = false
 # http://www.rabbitmq.com/configure.html#define-environment-variables
 # "The .config extension is automatically appended by the Erlang runtime."
 default['rabbitmq']['config'] = "/etc/rabbitmq/rabbitmq"
+default['rabbitmq']['config_cookbook'] = nil
 default['rabbitmq']['erlang_cookie_path'] = '/var/lib/rabbitmq/.erlang.cookie'
 
 # rabbitmq.config defaults
