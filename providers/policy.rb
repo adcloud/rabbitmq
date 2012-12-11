@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-action :mirror_queue do
+action :mirror_queues do
   execute "set_policy ha-all '#{new_resource.pattern}' '{\"ha-mode\":\"all\"}'" do
     not_if "sudo rabbitmqctl list_policies |grep 'ha-all'"
     Chef::Log.info "Mirror queue pattern '#{new_resource.pattern}'."
