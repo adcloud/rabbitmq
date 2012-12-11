@@ -19,7 +19,7 @@
 
 action :mirror_queue do
   execute "set_policy ha-all '#{new_resource.pattern}' '{\"ha-mode\":\"all\"}'" do
-    only_if "sudo rabbitmqctl list_queues name slave_pids |grep '^#{new_resource.pattern}[[:space:]]*\[\]'"
+    not_if "sudo rabbitmqctl list_policies |grep 'ha-all'"
     Chef::Log.info "Mirror queue pattern '#{new_resource.pattern}'."
     new_resource.updated_by_last_action(true)
   end
