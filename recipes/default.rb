@@ -87,7 +87,6 @@ when "smartos"
 
 end
 
-# <<<<<<< HEAD
 directory "mnesia dir" do 
   action :create
   path node["rabbitmq"]["mnesiadir"]
@@ -107,10 +106,7 @@ directory "log dir" do
 end
 
 
-# template "/etc/rabbitmq/rabbitmq-env.conf" do
-# =======
 template "#{node['rabbitmq']['config_root']}/rabbitmq-env.conf" do
-# >>>>>>> master
   source "rabbitmq-env.conf.erb"
   owner "root"
   group "root"
@@ -134,13 +130,8 @@ end
 
 if node['rabbitmq']['cluster'] and node['rabbitmq']['erlang_cookie'] != existing_erlang_key
 
-# <<<<<<< HEAD
-  service "rabbitmq-server" do
-    stop_command "sleep 10; service rabbitmq-server stop ; sleep 10"
-# =======
-#   service "stop #{node['rabbitmq']['service_name']}" do
-#     service_name node['rabbitmq']['service_name']
-# >>>>>>> master
+  service node['rabbitmq']['service_name'] do
+    service_name node['rabbitmq']['service_name']
     action :stop
   end
 
@@ -149,11 +140,7 @@ if node['rabbitmq']['cluster'] and node['rabbitmq']['erlang_cookie'] != existing
     owner "rabbitmq"
     group "rabbitmq"
     mode 00400
-# <<<<<<< HEAD
-#     #notifies :start, "service[rabbitmq-server]", :immediately
-# =======
     notifies :start, "service[#{node['rabbitmq']['service_name']}]", :immediately
-# >>>>>>> master
   end
 
 end
