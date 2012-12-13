@@ -130,6 +130,10 @@ end
 
 if node['rabbitmq']['cluster'] and node['rabbitmq']['erlang_cookie'] != existing_erlang_key
 
+  # We don't prefix the argument to this service declaration with
+  # "stop". Otherwise we fail to deploy, with the following error:
+  #   "service[stop rabbitmq-server] attempting to match 'stop
+  #    rabbitmq-server' (/stop rabbitmq-server/) against process list"
   service node['rabbitmq']['service_name'] do
     service_name node['rabbitmq']['service_name']
     action :stop
