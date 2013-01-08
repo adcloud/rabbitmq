@@ -119,6 +119,9 @@ template "#{node['rabbitmq']['config_root']}/rabbitmq.config" do
   owner "root"
   group "root"
   mode 00644
+  if node['rabbitmq']['config_cookbook']
+    cookbook node['rabbitmq']['config_cookbook']
+  end
   notifies :restart, "service[#{node['rabbitmq']['service_name']}]"
 end
 
