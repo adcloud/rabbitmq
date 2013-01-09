@@ -93,7 +93,7 @@ directory "mnesia dir" do
   group "rabbitmq"
   owner "rabbitmq"
   recursive true
-  not_if node["rabbitmq"]["mnesiadir"].nil?
+  not_if { node["rabbitmq"]["mnesiadir"].nil? }
 end
 
 directory "log dir" do 
@@ -102,7 +102,7 @@ directory "log dir" do
   group "rabbitmq"
   owner "rabbitmq"
   recursive true
-  not_if node["rabbitmq"]["logdir"].nil?
+  not_if { node["rabbitmq"]["logdir"].nil? }
 end
 
 
