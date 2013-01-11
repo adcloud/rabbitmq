@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: rabbitmq
-# Provider:: user
+# Provider:: policy
 #
 # Copyright 2011, Opscode, Inc.
 #
