@@ -33,6 +33,13 @@ action :delete do
   end
 end
 
+action :change_password do
+  execute "rabbitmqctl change_password #{new_resource.user} '#{new_resource.password}'" do
+    Chef::Log.info "Changing RabbitMQ user password for '#{new_resource.user}'."
+    new_resource.updated_by_last_action(true)
+  end
+end
+
 action :set_permissions do
   if new_resource.vhost
     execute "rabbitmqctl set_permissions -p #{new_resource.vhost} #{new_resource.user} #{new_resource.permissions}" do
