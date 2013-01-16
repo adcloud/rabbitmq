@@ -87,7 +87,7 @@ when "smartos"
 
 end
 
-directory "mnesia dir" do 
+directory "mnesia dir" do
   action :create
   path node["rabbitmq"]["mnesiadir"]
   group "rabbitmq"
@@ -96,7 +96,7 @@ directory "mnesia dir" do
   not_if { node["rabbitmq"]["mnesiadir"].nil? }
 end
 
-directory "log dir" do 
+directory "log dir" do
   action :create
   path node["rabbitmq"]["logdir"]
   group "rabbitmq"
